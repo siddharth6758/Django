@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    PeerRental | Login
+{% endblock title %}
+
+{% block navigation-bar %}
+<div class="container">
+    <div class="ua-navbar">
+        <a href="/">
+            <img src="{% static 'public/logo.png' %}" alt="Logo">
+        </a>
+        <div id="nav-btn">
+            <a href="/" class="btn">Home</a>
+            <a href="/signup" class="btn">Sign-Up</a>
+        </div>
+    </div>
+</div>
+{% endblock navigation-bar %}
+
+
+{% block main-content %}
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
+    {% endfor %} 
+{% endif %}
+<div class="container">
+    <div id="main-login">
+        <h3 style="margin-top: 40px; margin-bottom: -30px; font-size: 30px;">LOGIN</h3>
+        <form action="" method="POST" id="login-form">
+            {% csrf_token %}
+            <input type="email" id="email" class="form-field" name="email" placeholder="Email-Id:">
+            <input type="password" id="password" class="form-field" name="password" placeholder="Password:">
+            <button class="btn" type="submit">Login</button>
+        </form>
+    </div>
+</div>
+{% endblock main-content %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    PeerRental | Admin {{user.username}}
+{% endblock title %}
+
+{% block navigation-bar %}
+<div class="container">
+    <nav id="navbar">
+        <div id='logo'>
+            <a href="/">
+                <img src="{% static 'public/logo.png' %}" alt="Logo">
+            </a>
+        </div>
+        <div id="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Log</a>
+            <a href="#">Manage</a>
+            <a href="#">Users</a>
+        </div>
+        <div id="nav-btn">
+            <a href="/userprofile" id="user-prof">
+                <img src="{% static 'public/user.png' %}" alt="user" id="img-btn">
+                <span>{{user.username}}</span>
+            </a>
+            <a href="/logout" class="btn">Logout</a>
+        </div>
+    </nav>
+</div>
+{% endblock navigation-bar %}
+
+
+{% block main-content %}
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
+    {% endfor %} 
+{% endif %}
+<div id="banner">
+    <img src="{% static 'public/banner.png' %}" alt="banner" width="100%">
+</div>
+
+<footer id="footer">
+    <div class="container" id="footer-container">
+        <div id="left-footer">
+            <img src="{% static 'public/logo.png' %}" alt="logo" width="100px">
+            <h4 style="margin: 10px 0; font-size: 25px;">About</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nemo hic nihil temporibus sed quod veniam ex corporis maiores commodi.</p>
+        </div>
+        <div id="middle-footer">
+            <h4 style="margin-bottom: 20px; font-size: 25px;">Useful Links</h4>
+            <a href="">Home</a>
+            <a href="">Service</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+            <a href="">FAQ</a>
+        </div>
+        <div id="right-footer">
+            <h4 style="font-size: 25px;">Subscribe to Newsletter</h4>
+            <div id="newsletter">
+                <input type="email" id="nlform" placeholder="Enter your email address">
+                <button class="btn">Send</button>
+            </div>
+            <div id="social">
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock main-content %}

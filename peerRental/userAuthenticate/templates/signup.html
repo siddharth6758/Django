@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    PeerRental | Sign-Up
+{% endblock title %}
+
+{% block navigation-bar %}
+<div class="container">
+    <div class="ua-navbar">
+        <a href="/">
+            <img src="{% static 'public/logo.png' %}" alt="Logo">
+        </a>
+        <div id="nav-btn">
+            <a href="/" class="btn">Home</a>
+            <a href="/login" class="btn">Login</a>
+        </div>
+    </div>
+</div>
+{% endblock navigation-bar %}
+
+
+{% block main-content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
+    {% endfor %} 
+{% endif %}
+    
+<div class="container">
+    <div id="main-login">
+        <h3 style="margin-top: 40px; margin-bottom: -30px; font-size: 30px;">SIGN-UP</h3>
+        <form action="" method="POST" id="login-form">
+            {% csrf_token %}
+            <input type="text" id="email" class="form-field" name="email" placeholder="Email-id:">
+            <input type="text" id="username" class="form-field" name="username" placeholder="Username:">
+            <input type="text" id="firstname" class="form-field" name="firstname" placeholder="Firstname:">
+            <input type="text" id="lastname" class="form-field" name="lastname" placeholder="Lastname:">
+            <input type="text" id="phone" class="form-field" name="phone" placeholder="Phone No.:">
+            <input type="text" id="address" class="form-field" name="address" placeholder="Address:">
+            <input type="password" id="password" class="form-field" name="password" placeholder="Password:">
+            <button class="btn" type="submit">Register</button>
+        </form>
+    </div>
+</div>
+{% endblock main-content %}

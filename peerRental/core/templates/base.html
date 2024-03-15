@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    {% block title %}
+        PeerRental | Homepage
+    {% endblock title %}
+        </title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    {% block navigation-bar %}
+    <div class="container">
+        <nav id="navbar">
+            <div id='logo'>
+                <a href="/">
+                    <img src="{% static 'public/logo.png' %}" alt="Logo">
+                </a>
+            </div>
+            <div id="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+            </div>
+            <div id="nav-btn">
+                <a href="/login" class="btn">Login</a>
+                <a href="/signup" class="btn">Sign-Up</a>
+            </div>
+        </nav>
+    </div>
+    {% endblock navigation-bar %}
+
+
+    {% block main-content %}
+    <div id="banner">
+        <img src="{% static 'public/banner.png' %}" alt="banner" width="100%">
+    </div>
+    <div class="container">
+        <h2 id="process-header">Rental Process</h2>
+        <div id="process">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-regular fa-address-card"></i>
+                </div>
+                <div class="card-desc">
+                    <h3 style="margin-bottom: 10px; font-size:25px;">User Verification</h3>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, doloribus.
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-file-signature"></i>
+                </div>
+                <div class="card-desc">
+                    <h3 style="margin-bottom: 10px; font-size:25px;">Contract Process</h3>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, doloribus.
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-regular fa-handshake"></i>
+                </div>
+                <div class="card-desc">
+                    <h3 style="margin-bottom: 10px; font-size:25px;">Contract Completion</h3>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, doloribus.
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <div class="card-desc">
+                    <h3 style="margin-bottom: 10px; font-size:25px;">Delivery</h3>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, doloribus.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer id="footer">
+        <div class="container" id="footer-container">
+            <div id="left-footer">
+                <img src="{% static 'public/logo.png' %}" alt="logo" width="100px">
+                <h4 style="margin: 10px 0; font-size: 25px;">About</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nemo hic nihil temporibus sed quod veniam ex corporis maiores commodi.</p>
+            </div>
+            <div id="middle-footer">
+                <h4 style="margin-bottom: 20px; font-size: 25px;">Useful Links</h4>
+                <a href="">Home</a>
+                <a href="">Service</a>
+                <a href="">About</a>
+                <a href="">Contact</a>
+                <a href="">FAQ</a>
+            </div>
+            <div id="right-footer">
+                <h4 style="font-size: 25px;">Subscribe to Newsletter</h4>
+                <div id="newsletter">
+                    <input type="email" id="nlform" placeholder="Enter your email address">
+                    <button class="btn">Send</button>
+                </div>
+                <div id="social">
+                    <a href=""><i class="fa-brands fa-instagram"></i></a>
+                    <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook"></i></a>
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock main-content %}
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+
+</html>

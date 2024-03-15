@@ -55,7 +55,7 @@
 }
 
 #process{
-    margin: 30px -50px;
+    margin: 50px -50px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -75,6 +75,29 @@
 .card-desc{
     margin:20px 0;
     font-size: 18px;
+}
+
+.hr{
+    margin: 20px 0px;
+}
+
+#features{
+    margin: 100px 0px;
+    text-align: center;
+}
+.feature-items{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 80px;
+}
+.feature-img{
+    width: 50%;
+    padding:0 10px;
+}
+.feature-content{
+    width: 50%;
+    text-align:start;
 }
 /* ----------------FOOTER----------------- */
 

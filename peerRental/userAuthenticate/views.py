@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from userAuthenticate.models import CustomUser
+from products.models import Products
 from django.contrib import messages
 
 # Create your views here.
@@ -76,6 +77,8 @@ def adminpage(req):
 
 @login_required(login_url='/login/')
 def userhome(req,id):
+    products = Products.objects.all()
     return render(req,'homepage.html',context={
+        'products':products,
         'id':id,
     })

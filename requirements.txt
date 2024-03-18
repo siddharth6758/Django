@@ -4,3 +4,4 @@ djangorestframework
 psycopg
 django-jazzmin
 django-bootstrap-v5
+django-widget-tweaks

@@ -15,8 +15,8 @@
         </div>
         <div id="nav-links">
             <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
+            <a href="/uploadproduct">Upload</a>
+            <a href="/editproduct">Edit</a>
         </div>
         <div id="nav-btn">
             <a href="/userprofile" id="user-prof">
@@ -85,8 +85,30 @@
     <hr class="hr">
 </div>
 
-<div class="container" id="product-list">
-    product list
+<div class="container">
+    <div id="prod-container">
+        <h3 style="margin-bottom: 20px; font-size: 50px;">Product List</h3>
+        <div id="product-list">
+            <div class="prod-item">
+                <div class="prod-img">
+                    <img src="../../media/{{product.product_image}}" alt="prod">
+                </div>
+                <div class="prod-content">
+                    <h3 style="margin:10px 0;">title</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, voluptates.</p>
+                </div>
+            </div>
+            {% for product in products %}
+                <div class="prod-item">
+                    <div class="prod-img">
+                        <img src="../../media/{{product.product_image}}" alt="prod">
+                    </div>
+                    abcd
+                </div>
+            {% endfor %}
+                
+        </div>
+    </div>
 </div>
 
 <footer id="footer">

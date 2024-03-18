@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}
+    PeerRental | Upload Product
+{% endblock title %}
+
+{% block navigation-bar %}
+<div class="container">
+    <div class="ua-navbar">
+        <a href="/">
+            <img src="{% static 'public/logo.png' %}" alt="Logo">
+        </a>
+        <div id="nav-btn">
+            <a href="/" class="btn">Home</a>
+            <a href="/editproduct" class="btn">Edit Product</a>
+        </div>
+    </div>
+</div>
+{% endblock navigation-bar %}
+
+
+{% block main-content %}
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
+    {% endfor %} 
+{% endif %}
+<div class="container">
+    <div id="main-login">
+        <h3 style="margin-top: 40px; margin-bottom:-30px; font-size: 30px;">UPLOAD PRODUCT</h3>
+        <form action="" method="POST" id="prod-upload-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% render_field forms.title class="form-field-pu" placeholder="Enter Title"%}
+            {% render_field forms.description class="form-field-pu" placeholder="Enter Description"%}
+            {% render_field forms.product_image class="form-field-pu" placeholder="Enter Description"%}
+            <div id="pu-price-field">
+                {% render_field forms.price class="form-field-pu" placeholder="Enter Price" %}
+                {% render_field forms.rent_type class="form-field-pu" %}
+            </div>
+            <button class="btn" type="submit">Upload</button>
+        </form>
+    </div>
+</div>
+{% endblock main-content %}

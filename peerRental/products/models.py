@@ -6,11 +6,11 @@ def generate_filename(customuser,filename):
     return f'products/{customuser.user.username}/{filename}'
 
 RENT_CHOICES = (
-    ('phour','/hour'),
-    ('pday','/day'),
-    ('pweek','/week'),
-    ('pmonth','/month'),
-    ('pyear','/year'),
+    ('/hour','/hour'),
+    ('/day','/day'),
+    ('/week','/week'),
+    ('/month','/month'),
+    ('/year','/year'),
 )
 
 def pk_generator():
@@ -24,7 +24,7 @@ class Products(models.Model):
     product_image = models.FileField(upload_to=generate_filename)
     description = models.CharField(max_length=200)
     price = models.CharField()
-    rent_type = models.CharField(max_length=10,choices=RENT_CHOICES,default='phour')
+    rent_type = models.CharField(max_length=10,choices=RENT_CHOICES,default='/hour')
     title = models.CharField(max_length=20)
     
     def save(self,*args,**kwargs):

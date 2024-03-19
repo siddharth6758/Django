@@ -111,14 +111,26 @@
 .prod-item{
     width: 250px;
     margin: 5px;
-    border: 1px solid black;
 }
 .prod-img{
     width: 100%;
-    object-fit: contain;
+    height: 250px;
+    padding: 10px;
 }
 .prod-content{
-    
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    padding: 10px;
+}
+.prod-desc,.prod-postedby{
+    color: rgb(150, 150, 150);
+}
+.prod-desc,.prod-postedby,.prod-price{
+    margin:5px 0;
+}
+.rent-btn{
+    margin: 10px;
 }
 /* ----------------FOOTER----------------- */
 

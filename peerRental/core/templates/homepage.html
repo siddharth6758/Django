@@ -91,21 +91,25 @@
         <div id="product-list">
             <div class="prod-item">
                 <div class="prod-img">
-                    <img src="../../media/{{product.product_image}}" alt="prod">
+                    <img src="{% static 'public/camera.jpg' %}" alt="prod" width="100%" height="100%">
                 </div>
                 <div class="prod-content">
-                    <h3 style="margin:10px 0;">title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, voluptates.</p>
+                    <h3 style="margin:5px 0;" class="prod-title">title</h3>
+                    <p class="prod-desc"><strong>Description:</strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, voluptates.</p>
+                    <div class="prod-postedby"><strong>Posted by:</strong>boi</div>
+                    <div class="prod-price"><strong>Price:</strong> Rs 30/hr</div>
                 </div>
+                <div class="rent-btn btn">Rent</div>
             </div>
+            
             {% for product in products %}
-                <div class="prod-item">
-                    <div class="prod-img">
-                        <img src="../../media/{{product.product_image}}" alt="prod">
-                    </div>
-                    abcd
+            <!-- <div class="prod-item">
+                <div class="prod-img">
+                    <img src="../../media/{{product.product_image}}" alt="prod">
                 </div>
-            {% endfor %}
+                abcd
+            </div> -->
+        {% endfor %}
                 
         </div>
     </div>

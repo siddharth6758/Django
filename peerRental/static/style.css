@@ -27,6 +27,15 @@
     z-index: 5;
 }
 
+.fixed-nav{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #A084E8;
+}
+
 #nav-links a, .btn{
     margin: 0 8px;
     text-decoration: none;
@@ -110,6 +119,7 @@
 
 #prod-container{
     text-align: center;
+    margin: 20px 0;
 }
 #product-list{
     display: flex;

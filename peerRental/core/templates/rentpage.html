@@ -7,15 +7,14 @@
 
 {% block navigation-bar %}
 <div class="container">
-    <nav id="navbar">
+    <nav class="fixed-nav">
         <div id='logo'>
             <a href="/user/{{id}}">
                 <img src="{% static 'public/logo.png' %}" alt="Logo">
             </a>
         </div>
         <div id="nav-links">
-            <a href="#">Home</a>
-            <a href="/uploadproduct">Upload</a>
+            <a href="/user/{{id}}">Back</a>
             <a href="/myproducts/{{id}}">My Products</a>
             <a href="/myorders/{{id}}">My Orders</a>
         </div>
@@ -32,54 +31,6 @@
 
 
 {% block main-content %}
-<div id="banner">
-    <img src="{% static 'public/banner.png' %}" alt="banner" width="100%">
-</div>
-<div class="container">
-    <h2 id="process-header">Rental Process</h2>
-    <div id="process">
-        <div class="card">
-            <div class="card-icon">
-                <i class="fa-regular fa-address-card"></i>
-            </div>
-            <div class="card-desc">
-                <h3 style="margin-bottom: 10px; font-size:25px;">User Verification</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, doloribus.
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-icon">
-                <i class="fa-solid fa-file-signature"></i>
-            </div>
-            <div class="card-desc">
-                <h3 style="margin-bottom: 10px; font-size:25px;">Contract Process</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, doloribus.
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-icon">
-                <i class="fa-regular fa-handshake"></i>
-            </div>
-            <div class="card-desc">
-                <h3 style="margin-bottom: 10px; font-size:25px;">Contract Completion</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, doloribus.
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-icon">
-                <i class="fa-solid fa-truck-fast"></i>
-            </div>
-            <div class="card-desc">
-                <h3 style="margin-bottom: 10px; font-size:25px;">Delivery</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, doloribus.
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <hr class="hr">
-</div>
 {% if messages %}
     {% for message in messages %}
         <div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>

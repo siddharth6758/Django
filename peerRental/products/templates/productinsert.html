@@ -32,12 +32,12 @@
         <h3 style="margin-top: 40px; margin-bottom:-30px; font-size: 30px;">UPLOAD PRODUCT</h3>
         <form action="" method="POST" id="prod-upload-form" enctype="multipart/form-data">
             {% csrf_token %}
-            {% render_field forms.title class="form-field-pu" placeholder="Enter Title"%}
-            {% render_field forms.description class="form-field-pu" placeholder="Enter Description"%}
+            {% render_field forms.title class="form-field-pu" placeholder="Enter Title" name="title"%}
+            {% render_field forms.description class="form-field-pu" placeholder="Enter Description" name="prod_img"%}
             {% render_field forms.product_image class="form-field-pu" placeholder="Enter Picture" name='product-image'%}
             <div id="pu-price-field">
-                {% render_field forms.price class="form-field-pu" placeholder="Enter Price" %}
-                {% render_field forms.rent_type class="form-field-pu" %}
+                {% render_field forms.price class="form-field-pu" placeholder="Enter Price" name="price"%}
+                {% render_field forms.rent_type class="form-field-pu" name="rent_type"%}
             </div>
             <button class="btn" type="submit">Upload</button>
         </form>

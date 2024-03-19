@@ -111,6 +111,7 @@
 .prod-item{
     width: 250px;
     margin: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .prod-img{
     width: 100%;
@@ -123,10 +124,10 @@
     text-align: start;
     padding: 10px;
 }
-.prod-desc,.prod-postedby{
+.prod-desc,.prod-postedby,.prod-postedon{
     color: rgb(150, 150, 150);
 }
-.prod-desc,.prod-postedby,.prod-price{
+.prod-desc,.prod-postedby,.prod-price,.prod-postedon{
     margin:5px 0;
 }
 .rent-btn{

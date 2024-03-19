@@ -2,9 +2,6 @@ from django.db import models
 from userAuthenticate.models import CustomUser
 import random,string
 
-def generate_filename(customuser,filename):
-    return f'products/{customuser.user.username}/{filename}'
-
 RENT_CHOICES = (
     ('/hour','/hour'),
     ('/day','/day'),
@@ -20,8 +17,8 @@ def pk_generator():
 class Products(models.Model):
     prod_id = models.CharField(max_length=4,primary_key=True)
     posted_by = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-    posted_on = models.DateTimeField(auto_now=True) 
-    product_image = models.FileField(upload_to=generate_filename)
+    posted_on = models.DateTimeField(auto_now_add=True) 
+    product_image = models.FileField(upload_to='products/')
     description = models.CharField(max_length=200)
     price = models.CharField()
     rent_type = models.CharField(max_length=10,choices=RENT_CHOICES,default='/hour')

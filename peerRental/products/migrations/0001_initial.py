@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('prod_id', models.CharField(max_length=4, primary_key=True, serialize=False)),
                 ('posted_on', models.DateTimeField(auto_now=True)),
-                ('product_image', models.FileField(upload_to=products.models.generate_filename)),
+                ('product_image', models.FileField()),
                 ('description', models.CharField(max_length=200)),
                 ('price', models.CharField()),
                 ('rent_type', models.CharField(choices=[('phour', '/hour'), ('pday', '/day'), ('pweek', '/week'), ('pmonth', '/month'), ('pyear', '/year')], default='phour', max_length=10)),

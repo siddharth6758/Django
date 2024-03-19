@@ -24,6 +24,8 @@ def upload_prod(req):
             #     rent_type=rent_type,
             #     title=title
             # )
+            product = forms.save(commit=False)
+            product.posted_by_id = req.user.id
             forms.save()
             return redirect(f"/user/{req.user.id}")
         else:

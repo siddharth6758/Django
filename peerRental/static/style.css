@@ -41,6 +41,14 @@
     cursor: pointer;
 }
 
+.btn-disabled{
+    padding: 5px 10px;
+    border: none;
+    color:rgb(87, 87, 87);
+    background-color: #abb4b9;
+    cursor: pointer;
+}
+
 .ua-navbar{
     display: flex;
     align-items: center;
@@ -109,7 +117,10 @@
     margin: 30px -30px;
 }
 .prod-item{
+    text-decoration: none;
+    color: black;
     width: 250px;
+    height: 500px;
     margin: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -129,9 +140,14 @@
 }
 .prod-desc,.prod-postedby,.prod-price,.prod-postedon{
     margin:5px 0;
+    text-overflow: ellipsis;
 }
-.rent-btn{
-    margin: 10px;
+.prod-btns{
+    display: flex;
+    flex-wrap: wrap;
+}
+.cancel-btn{
+    background-color: rgb(245, 128, 128);
 }
 /* ----------------FOOTER----------------- */
 
@@ -231,6 +247,7 @@
     text-align: center;
     color: azure;
     text-decoration: none;
+    margin: 0px 10px;
 }
 
 #img-btn{

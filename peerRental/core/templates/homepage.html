@@ -31,11 +31,6 @@
 
 
 {% block main-content %}
-{% if messages %}
-    {% for message in messages %}
-        <div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
-    {% endfor %} 
-{% endif %}
 <div id="banner">
     <img src="{% static 'public/banner.png' %}" alt="banner" width="100%">
 </div>
@@ -84,37 +79,48 @@
 <div class="container">
     <hr class="hr">
 </div>
-
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
+    {% endfor %} 
+{% endif %}
 <div class="container">
     <div id="prod-container">
         <h3 style="margin-bottom: 20px; font-size: 50px;">Product List</h3>
         <div id="product-list">
+        {% for product in products %}
             <div class="prod-item">
                 <div class="prod-img">
-                    <img src="{% static 'public/camera.jpg' %}" alt="prod" width="100%" height="100%">
+                    <a href="">
+                        <img src="{% static 'public/camera.jpg' %}" alt="prod" width="100%" height="100%">
+                    </a>
                 </div>
                 <div class="prod-content">
-                    <h3 style="margin:5px 0;" class="prod-title">title</h3>
-                    <p class="prod-desc"><strong>Description:</strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, voluptates.</p>
-                    <div class="prod-postedby"><strong>Posted by:</strong>boi</div>
-                    <div class="prod-price"><strong>Price:</strong> Rs 30/hr</div>
+                    <h3 style="margin:5px 0;" class="prod-title">{{product.title}}</h3>
+                    <p class="prod-desc"><strong>Description:</strong>{{product.description}}</p>
+                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by}}</div>
+                    <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
+                    <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
                 </div>
-                <div class="rent-btn btn">Rent</div>
+                <div class="prod-btns">
+                    <form action="{% url 'delete_prod' product.prod_id %}" method="POST">
+                        {% csrf_token %}
+                        {% if id != product.posted_by_id %}
+                            <button class="btn btn-disabled" type="submit" disabled>Remove</button>
+                            {% else %}
+                            <button class="btn cancel-btn" type="submit">Remove</button>
+                        {% endif %}
+                    </form>
+                    <form action="{% url 'rent_prod' product.prod_id %}" method="POST">
+                        {% csrf_token %}
+                        {% if id == product.posted_by_id %}
+                            <button class="btn btn-disabled" type="submit" disabled>Rent</button>
+                        {% else %}
+                            <button class="btn rent-btn" type="submit">Rent</button>
+                        {% endif %}
+                    </form>
+                </div>
             </div>
-        {% for product in products %}
-        <div class="prod-item">
-            <div class="prod-img">
-                <img src="{% static 'public/camera.jpg' %}" alt="prod" width="100%" height="100%">
-            </div>
-            <div class="prod-content">
-                <h3 style="margin:5px 0;" class="prod-title">{{product.title}}</h3>
-                <p class="prod-desc"><strong>Description:</strong>{{product.description}}</p>
-                <div class="prod-postedby"><strong>Posted by:</strong>{{product..product.posted_by}}</div>
-                <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
-                <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
-            </div>
-            <div class="rent-btn btn">Rent</div>
-        </div>
         {% endfor %}
                 
         </div>

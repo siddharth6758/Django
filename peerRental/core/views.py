@@ -22,8 +22,8 @@ def delete_prod(req,prod_id):
 @login_required(login_url='/login/')
 def rent_prod(req,prod_id):
     buyuserid = req.user.id
-    selluserid = Products.objects.filter(prod_id=prod_id).values().first()
-    selluserid = selluserid['posted_by_id']
+    selluserid = Products.objects.filter(prod_id=prod_id).first()
+    selluserid = selluserid.posted_by_id
     if buyuserid == selluserid:
         messages.info(req,'You cannot rent your own product!')
         return redirect(f'/user/{req.user.id}')
@@ -31,7 +31,13 @@ def rent_prod(req,prod_id):
 
 @login_required(login_url='/login/')
 def complete_order(req,prod_id,buy_id,sell_id):
-    print(prod_id,buy_id,sell_id)
+    product = Products.objects.filter(prod_id=prod_id).first()
     return render(req,'rentpage.html',context={
         'id':buy_id,
+        'product':product,
     })
+
+@login_required(login_url='/login/')
+def confirm_rent(req,prod_id,buy_id,sell_id):
+    print(prod_id,buy_id,sell_id)
+    return render(req,'base.html')

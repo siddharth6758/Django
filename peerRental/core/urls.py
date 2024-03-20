@@ -6,4 +6,5 @@ urlpatterns = [
     path('delete/<str:prod_id>',cv.delete_prod,name='delete_prod'),
     path('rent/<str:prod_id>',cv.rent_prod,name='rent_prod'),
     path('rentprod/<str:prod_id>b<int:buy_id>s<int:sell_id>',cv.complete_order,name='complete_order'),
+    path('confirm_rent/<str:prod_id>b<int:buy_id>s<int:sell_id>',cv.confirm_rent,name='confirm_rent'),
 ]

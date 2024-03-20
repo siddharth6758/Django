@@ -78,7 +78,6 @@ def adminpage(req):
 @login_required(login_url='/login/')
 def userhome(req,id):
     products = Products.objects.all()
-    print(products)
     return render(req,'homepage.html',context={
         'products':products,
         'id':id,

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    PeerRental | Home {{user.username}}
+PeerRental | Home {{user.username}}
 {% endblock title %}
 
 {% block navigation-bar %}
@@ -32,49 +32,43 @@
 
 {% block main-content %}
 {% if messages %}
-    {% for message in messages %}
-        <div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
-    {% endfor %} 
+{% for message in messages %}
+<div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
+{% endfor %}
 {% endif %}
 <div class="container">
     <div id="prod-container">
-        <h3 style="margin-bottom: 20px; font-size: 50px;">Product List</h3>
-        <div id="product-list">
-        {% for product in products %}
-            <div class="prod-item">
-                <div class="prod-img">
-                    <a href="">
-                        <img src="../../media/{{product.product_image}}" alt="prod" width="100%" height="100%">
-                    </a>
+        <h3 style="margin-bottom: 20px; font-size: 50px;">Product</h3>
+        <div id="prodtorent">
+            <div id="product-display">
+                <img src="../../media/{{product.product_image}}" alt="prod" width="250px" height="250px" style="margin: 0 10px;">
+                <div class="prod-content" style="padding: 0px; margin: 0 10px;">
+                    <h3 style="margin:20px 0; font-size: 30px;">{{product.title}}</h3>
+                    <p class="desc-display"><strong>Description: </strong>{{product.description}}</p>
+                    <div class="postedby-display"><strong>Posted by: </strong>{{product.posted_by}}</div>
+                    <div class="postedon-display"><strong>Posted on: </strong>{{product.posted_on}}</div>
+                    <div class="price-display"><strong>Price:</strong> Rs {{product.price}} {{product.rent_type}}</div>
                 </div>
-                <div class="prod-content">
-                    <h3 style="margin:5px 0;" class="prod-title">{{product.title}}</h3>
-                    <p class="prod-desc"><strong>Description:</strong>{{product.description}}</p>
-                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by}}</div>
-                    <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
-                    <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
-                </div>
-                <div class="prod-btns">
-                    <form action="{% url 'delete_prod' product.prod_id %}" method="POST">
+                <div class="btns-display">
+                    <form action="{% url 'confirm_rent' product.prod_id id product.posted_by_id %}" method="POST">
                         {% csrf_token %}
-                        {% if id != product.posted_by_id %}
-                            <button class="btn btn-disabled" type="submit" disabled>Remove</button>
-                            {% else %}
-                            <button class="btn cancel-btn" type="submit">Remove</button>
-                        {% endif %}
+                        <button class="btn success-btn">Rent</button>
                     </form>
-                    <form action="{% url 'rent_prod' product.prod_id %}" method="POST">
-                        {% csrf_token %}
-                        {% if id == product.posted_by_id %}
-                            <button class="btn btn-disabled" type="submit" disabled>Rent</button>
-                        {% else %}
-                            <button class="btn rent-btn" type="submit">Rent</button>
-                        {% endif %}
-                    </form>
+                    <button class="btn" id="chat-btn">Chat with Owner</button>
                 </div>
             </div>
-        {% endfor %}
-                
+            <div id="messages-container">
+                <div id="chat-title">
+                    <h3 style="font-size: 20px;">Chatting with ABCD</h3>
+                </div>
+                <div id="chat-container">
+                    <div class="msg-left">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non, voluptates!</div>
+                    <div class="msg-right">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil necessitatibus distinctio cum delectus porro minima aliquid nemo placeat possimus impedit?</div>
+                </div>
+                <div id="chat-form">
+                    abcd
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -84,7 +78,8 @@
         <div id="left-footer">
             <img src="{% static 'public/logo.png' %}" alt="logo" width="100px">
             <h4 style="margin: 10px 0; font-size: 25px;">About</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nemo hic nihil temporibus sed quod veniam ex corporis maiores commodi.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nemo hic nihil temporibus sed quod veniam
+                ex corporis maiores commodi.</p>
         </div>
         <div id="middle-footer">
             <h4 style="margin-bottom: 20px; font-size: 25px;">Useful Links</h4>

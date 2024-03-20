@@ -66,8 +66,11 @@ PeerRental | Home {{user.username}}
                     <div class="msg-right">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil necessitatibus distinctio cum delectus porro minima aliquid nemo placeat possimus impedit?</div>
                 </div>
                 <div id="chat-form">
-                    <form action="{% url  %}"></form>
-                    <input type="text" id="chat-field" name="chat-field">
+                    <form action="{% url 'complete_order' product.prod_id id product.posted_by_id%}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" id="chat-field" name="chat-field">
+                        <button type="submit" class="btn">Send</button>
+                    </form>
                 </div>
             </div>
         </div>

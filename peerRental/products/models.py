@@ -28,3 +28,10 @@ class Products(models.Model):
         if not self.prod_id:
             self.prod_id = pk_generator()
         super().save(*args, **kwargs)
+        
+class ChatMessages(models.Model):
+    chat_over_prod = models.ForeignKey(Products,on_delete=models.CASCADE)
+    buyer_id = models.CharField(max_length=2)    
+    seller_id = models.CharField(max_length=2)
+    date_time = models.DateTimeField(auto_now_add=True)
+    message = models.CharField(max_length=200)    

@@ -39,9 +39,10 @@ def upload_prod(req):
 @login_required(login_url='/login/')
 def edit_prod(req,prod_id,id):
     forms = ProductFrom()
+    product = Products.objects.filter(prod_id=prod_id).filter(posted_by_id=id).first()
     if req.method == 'POST':
+        print('inside method')
         forms = ProductFrom(req.POST,req.FILES)
-        product = Products.objects.filter(prod_id=prod_id).filter(posted_by_id=id)
         if forms.is_valid():
             prod_img = req.FILES.get('prod_img')
             description = req.POST.get('description')

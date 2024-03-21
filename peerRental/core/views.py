@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from products.models import Products,ChatMessages
 from django.contrib import messages
 import re
@@ -46,6 +48,7 @@ def complete_order(req,prod_id,buy_id,sell_id):
                 message = chats
             )
             chat_save.save()
+            return HttpResponseRedirect(reverse('complete_order', args=(prod_id, buy_id, sell_id)))
     chatmessages = ChatMessages.objects.filter(chat_prod_id=prod_id).values()
     return render(req,'rentpage.html',context={
         'id':buy_id,
@@ -57,6 +60,15 @@ def complete_order(req,prod_id,buy_id,sell_id):
 def clearchats(req,prod_id,to_id,from_id):
     ChatMessages.objects.filter(chat_prod_id=prod_id).filter(msg_from=from_id).filter(msg_to=to_id).delete()
     return redirect(f'/rentprod/{prod_id}b{from_id}s{to_id}')
+
+
+@login_required(login_url='/login/')
+def myproducts(req,id):
+    products = Products.objects.filter(posted_by_id=id)
+    return render(req,'myproducts.html',context={
+        'id':req.user.id,
+        'products':products,
+    })
 
 @login_required(login_url='/login/')
 def confirm_rent(req,prod_id,buy_id,sell_id):

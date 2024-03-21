@@ -31,7 +31,7 @@
         <h3 style="margin-top: 40px; margin-bottom:-30px; font-size: 30px;">UPLOAD PRODUCT</h3>
         <form action="" method="POST" id="prod-upload-form" enctype="multipart/form-data">
             {% csrf_token %}
-            {% render_field forms.title class="form-field-pu" placeholder="Enter Title" name="title"%}
+            {% render_field forms.title class="form-field-pu" placeholder="{{product.title}}" name="title"%}
             {% render_field forms.description class="form-field-pu" placeholder="Enter Description" name="prod_img"%}
             {% render_field forms.product_image class="form-field-pu" placeholder="Enter Picture" name='product-image'%}
             <div id="pu-price-field">

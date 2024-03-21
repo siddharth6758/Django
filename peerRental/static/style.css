@@ -173,7 +173,7 @@
 
 #prodtorent{
     margin:50px 0px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     text-align: start;
     padding: 5px;
     display: flex;
@@ -191,6 +191,8 @@
 
 #chat-title{
     padding: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
 #chat-container{
@@ -209,6 +211,10 @@
     border-radius: 10px;
     word-wrap: break-word;
     margin: 5px;
+}
+
+.chat-date{
+    color: #d1d1d1;
 }
 
 .msg-right{

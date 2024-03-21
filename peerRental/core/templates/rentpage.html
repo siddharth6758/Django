@@ -38,10 +38,10 @@ PeerRental | Home {{user.username}}
 {% endif %}
 <div class="container">
     <div id="prod-container">
-        <h3 style="margin-bottom: 20px; font-size: 50px;">Product</h3>
         <div id="prodtorent">
             <div id="product-display">
-                <img src="../../media/{{product.product_image}}" alt="prod" width="250px" height="250px" style="margin: 0 10px;">
+                <img src="../../media/{{product.product_image}}" alt="prod" width="250px" height="250px"
+                    style="margin: 0 10px;">
                 <div class="prod-content" style="padding: 0px; margin: 0 10px;">
                     <h3 style="margin:20px 0; font-size: 30px;">{{product.title}}</h3>
                     <p class="desc-display"><strong>Description: </strong>{{product.description}}</p>
@@ -57,14 +57,22 @@ PeerRental | Home {{user.username}}
                     <button class="btn" id="chat-btn">Chat with Owner</button>
                 </div>
             </div>
-            <div id="messages-container">
+            <div id="messages-container" class="hidden">
                 <div id="chat-title">
-                    <h3 style="font-size: 20px;">Chatting with ABCD</h3>
+                    <h3 style="font-size: 20px;">Chatting with {{product.posted_by}}</h3>
+                    <a href="{% url 'clearchats' product.prod_id id product.posted_by_id %}" class="btn">Clear Chat</a>
                 </div>
                 <div id="chat-container">
-                    <div class="msg-left">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non, voluptates!</div>
-                    <div class="msg-right">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil necessitatibus distinctio cum delectus porro minima aliquid nemo placeat possimus impedit?</div>
-                    <div class="msg-right">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil necessitatibus distinctio cum delectus porro minima aliquid nemo placeat possimus impedit?</div>
+                    {% for chat in chatmessages %}
+                    {% if chat.msg_from == id|stringformat:'s' %}
+                    <div class="msg-right">
+                        {{chat.message}}
+                        <div class="chat-date"><small>{{chat.date_time}}</small></div>
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+
                 </div>
                 <div id="chat-form">
                     <form action="{% url 'complete_order' product.prod_id id product.posted_by_id%}" method="POST">

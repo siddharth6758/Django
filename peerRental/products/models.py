@@ -17,6 +17,7 @@ def pk_generator():
 class Products(models.Model):
     prod_id = models.CharField(max_length=4,primary_key=True)
     posted_by = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    rented_by = models.CharField(default='Not yet')
     posted_on = models.DateTimeField(auto_now_add=True) 
     product_image = models.FileField(upload_to='products/')
     description = models.CharField(max_length=200)
@@ -30,8 +31,8 @@ class Products(models.Model):
         super().save(*args, **kwargs)
         
 class ChatMessages(models.Model):
-    chat_over_prod = models.ForeignKey(Products,on_delete=models.CASCADE)
-    buyer_id = models.CharField(max_length=2)    
-    seller_id = models.CharField(max_length=2)
+    chat_prod_id = models.ForeignKey(Products,on_delete=models.CASCADE)
+    msg_to = models.CharField(max_length=2,null=False)    
+    msg_from = models.CharField(max_length=2,null=False)
     date_time = models.DateTimeField(auto_now_add=True)
-    message = models.CharField(max_length=200)    
+    message = models.CharField(max_length=200,null=False)    

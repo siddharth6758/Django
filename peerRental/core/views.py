@@ -31,7 +31,7 @@ def rent_prod(req,prod_id):
     if buyuserid == selluserid:
         messages.info(req,'You cannot rent your own product!')
         return redirect(f'/user/{req.user.id}')
-    return redirect(f'/rentprod/{prod_id}b{buyuserid}s{selluserid}')
+    return redirect(f'/rentprod/{prod_id}B{buyuserid}S{selluserid}')
 
 @login_required(login_url='/login/')
 def complete_order(req,prod_id,buy_id,sell_id):
@@ -59,7 +59,7 @@ def complete_order(req,prod_id,buy_id,sell_id):
 @login_required(login_url='/login/')
 def clearchats(req,prod_id,to_id,from_id):
     ChatMessages.objects.filter(chat_prod_id=prod_id).filter(msg_from=from_id).filter(msg_to=to_id).delete()
-    return redirect(f'/rentprod/{prod_id}b{from_id}s{to_id}')
+    return redirect(f'/rentprod/{prod_id}B{from_id}S{to_id}')
 
 
 @login_required(login_url='/login/')

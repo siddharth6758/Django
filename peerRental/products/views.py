@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from products.forms import *
 from products.models import *
 from userAuthenticate.models import *
+from userAuthenticate.models import *
 
 
 @login_required(login_url='/login/')
@@ -61,4 +62,22 @@ def edit_prod(req,prod_id,id):
         'forms':forms,
         'product':product,
         'id':req.user.id,
+    })
+
+
+@login_required(login_url='/login/')
+def chatwith(req,prod_id,id):
+    messages = list(ChatMessages.objects.filter(chat_prod_id=prod_id).filter(msg_to=id).values())
+    unique_chats = {i['msg_from'] for i in messages}
+    chat_users = []
+    for i in unique_chats:
+        user_info = {}
+        user_info['id'] = i
+        user_info['username'] = CustomUser.objects.filter(id=i).values().first()['username']
+        user_info['email'] = CustomUser.objects.filter(id=i).values().first()['email']
+        user_info['last_chat'] = ChatMessages.objects.filter(chat_prod_id=prod_id).filter(msg_from=i).values().last()['message']
+        chat_users.append(user_info)
+    return render(req,'chatwith.html',context={
+        'id':id,
+        'userchatdetails':chat_users,
     })

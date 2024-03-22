@@ -246,6 +246,28 @@
     font-size: 20px;
     margin: 5px 0;
 }
+#table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.th, .td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+.th {
+    background-color: #f2f2f2;
+}
+
+.data-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+
 /* ----------------FOOTER----------------- */
 
 #footer{

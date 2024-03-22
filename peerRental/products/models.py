@@ -35,4 +35,5 @@ class ChatMessages(models.Model):
     msg_to = models.CharField(max_length=2,null=False)    
     msg_from = models.CharField(max_length=2,null=False)
     date_time = models.DateTimeField(auto_now_add=True)
+    msg_type = models.CharField(max_length=10,null=False)
     message = models.CharField(max_length=200,null=False)    

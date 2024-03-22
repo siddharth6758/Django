@@ -45,11 +45,12 @@ def complete_order(req,prod_id,buy_id,sell_id):
                 chat_prod_id = product,
                 msg_from = req.user.id,
                 msg_to = sell_id,
+                msg_type = 'going',
                 message = chats
             )
             chat_save.save()
             return HttpResponseRedirect(reverse('complete_order', args=(prod_id, buy_id, sell_id)))
-    chatmessages = ChatMessages.objects.filter(chat_prod_id=prod_id).values()
+    chatmessages = ChatMessages.objects.filter(chat_prod_id=prod_id).filter(msg_from=buy_id).filter(msg_to=sell_id).values()
     return render(req,'rentpage.html',context={
         'id':buy_id,
         'product':product,

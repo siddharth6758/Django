@@ -64,13 +64,12 @@ PeerRental | Home {{user.username}}
                 </div>
                 <div id="chat-container">
                     {% for chat in chatmessages %}
-                    {% if chat.msg_from == id|stringformat:'s' %}
+                    {% if chat.msg_type == 'going' %}
                     <div class="msg-right">
                         {{chat.message}}
                         <div class="chat-date"><small>{{chat.date_time}}</small></div>
                     </div>
                     {% endif %}
-
                     {% endfor %}
 
                 </div>

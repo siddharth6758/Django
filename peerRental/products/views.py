@@ -79,5 +79,6 @@ def chatwith(req,prod_id,id):
         chat_users.append(user_info)
     return render(req,'chatwith.html',context={
         'id':id,
+        'prod_id':prod_id,
         'userchatdetails':chat_users,
     })

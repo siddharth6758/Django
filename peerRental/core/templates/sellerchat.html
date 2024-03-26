@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-PeerRental | Home {{user.username}}
+PeerRental | Chatwith {{user.username}}
 {% endblock title %}
 
 {% block navigation-bar %}
@@ -14,9 +14,7 @@ PeerRental | Home {{user.username}}
             </a>
         </div>
         <div id="nav-links">
-            <a href="/user/{{id}}">Back</a>
-            <a href="/uploadproduct">Upload</a>
-            <a href="/myorders/{{id}}">My Orders</a>
+            <a href="/myproducts/chatwith/{{product.prod_id}}W{{id}}">Back</a>
         </div>
         <div id="nav-btn">
             <a href="/userprofile" id="user-prof">
@@ -37,28 +35,33 @@ PeerRental | Home {{user.username}}
 {% endfor %}
 {% endif %}
 <div class="container">
-    <div id="prod-container">
-        <h3 style="margin-bottom: 20px; font-size: 50px;">Your Posts</h3>
-        <div id="product-list">
-            {% for product in products %}
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="../../media/{{product.product_image}}" alt="prod" width="100%" height="100%">
-                </div>
-                <div class="prod-content">
-                    <h3 style="margin:5px 0;" class="prod-title">{{product.title}}</h3>
-                    <p class="prod-desc"><strong>Description:</strong>{{product.description}}</p>
-                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by}}</div>
-                    <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
-                    <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
-                </div>
-                <div class="prod-btns">
-                    <a href='chatwith/{{product.prod_id}}W{{id}}' class="btn success-btn" type="submit">Chat</a>
-                    <a href="edit/{{product.prod_id}}X{{id}}" class="btn">Edit</a>
-                </div>
+    <div id="seller-msg-container">
+        <div id="chat-title">
+            <h3 style="font-size: 20px;">Chatting with {{buyer.username}}</h3>
+            <a href="{% url 'clearchats' product.prod_id buyer.id product.posted_by_id %}" class="btn">Clear Chat</a>
+        </div>
+        <div id="chat-container">
+            {% for chat in chatmessages %}
+            {% if chat.msg_type == 'going' %}
+            <div class="msg-left">
+                {{chat.message}}
+                <div class="chat-date"><small>{{chat.date_time}}</small></div>
             </div>
+            {% elif chat.msg_type == 'coming' %}
+            <div class="msg-right">
+                {{chat.message}}
+                <div class="chat-date"><small>{{chat.date_time}}</small></div>
+            </div>
+            {% endif %}
             {% endfor %}
-
+    
+        </div>
+        <div id="chat-form">
+            <form action="{% url 'sellerchat' product.prod_id buyer.id id%}" method="POST">
+                {% csrf_token %}
+                <input type="text" id="chat-field" name="chat-field">
+                <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
         </div>
     </div>
 </div>

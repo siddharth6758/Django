@@ -39,25 +39,25 @@ def upload_prod(req):
 
 @login_required(login_url='/login/')
 def edit_prod(req,prod_id,id):
-    forms = ProductFrom()
     product = Products.objects.filter(prod_id=prod_id).filter(posted_by_id=id).first()
+    forms = ProductFrom(instance=product)
     if req.method == 'POST':
         print('inside method')
-        forms = ProductFrom(req.POST,req.FILES)
+        forms = ProductFrom(req.POST,req.FILES,instance=product)
         if forms.is_valid():
-            prod_img = req.FILES.get('prod_img')
+            prod_img = req.FILES.get('product-image')
             description = req.POST.get('description')
             price = req.POST.get('price')
             rent_type = req.POST.get('rent_type')
             title = req.POST.get('title')
-            product = Products.objects.filter(prod_id=prod_id).filter(posted_by_id=id).update(
-                prod_img = prod_img,
-                description = description,
-                price = price,
-                rent_type = rent_type,
-                title = title,
-            )
+            if prod_img:
+                product.product_image - prod_img
+            product.title = title
+            product.description = description
+            product.price = price
+            product.rent_type = rent_type
             product.save()
+            return redirect(f'/user/{id}')
     return render(req,'productedit.html',context={
         'forms':forms,
         'product':product,

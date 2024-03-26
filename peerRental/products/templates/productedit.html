@@ -3,13 +3,13 @@
 {% load static %}
 
 {% block title %}
-    PeerRental | Upload Product
+    PeerRental | Edit Product
 {% endblock title %}
 
 {% block navigation-bar %}
 <div class="container">
     <div class="ua-navbar">
-        <a href="/">
+        <a href="/user/{{id}}">
             <img src="{% static 'public/logo.png' %}" alt="Logo">
         </a>
         <div id="nav-btn">
@@ -31,14 +31,15 @@
         <h3 style="margin-top: 40px; margin-bottom:-30px; font-size: 30px;">EDIT PRODUCT</h3>
         <form action="" method="POST" id="prod-upload-form" enctype="multipart/form-data">
             {% csrf_token %}
-            {% render_field forms.title class="form-field-pu" placeholder='{{product.title}}' name="title"%}
-            {% render_field forms.description class="form-field-pu" placeholder="Enter Description" name="prod_img"%}
-            {% render_field forms.product_image class="form-field-pu" placeholder="Enter Picture" name='product-image'%}
+            {% render_field forms.title class="form-field-pu" name="title" value=product.title %}
+            {% render_field forms.description class="form-field-pu" name="description" value=product.description%}
+            {% render_field forms.product_image class="form-field-pu" name='product-image'%} 
+            <img src="../../media/{{product.product_image}}" alt=product.title width="50px" height="50px" style="opacity: 0.5;">
             <div id="pu-price-field">
-                {% render_field forms.price class="form-field-pu" placeholder="Enter Price" name="price"%}
-                {% render_field forms.rent_type class="form-field-pu" name="rent_type"%}
+                {% render_field forms.price class="form-field-pu" name="price" value=product.price%}
+                {% render_field forms.rent_type class="form-field-pu" name="rent_type" value=product.rent_type%}
             </div>
-            <button class="btn" type="submit">Upload</button>
+            <button class="btn" type="submit">Edit</button>
         </form>
     </div>
 </div>

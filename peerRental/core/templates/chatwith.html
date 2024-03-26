@@ -14,7 +14,7 @@ PeerRental | Chatwith {{user.username}}
             </a>
         </div>
         <div id="nav-links">
-            <a href="/user/{{id}}">Back</a>
+            <a href="/myproducts/{{id}}">Back</a>
             <a href="/myorders/{{id}}">My Orders</a>
         </div>
         <div id="nav-btn">
@@ -38,6 +38,10 @@ PeerRental | Chatwith {{user.username}}
 <div class="container">
     <div id="prod-container">
         <h3 style="margin-bottom: 20px; font-size: 50px;">Your Messages</h3>
+        
+        {% if userchatdetails|length == 0 %}
+            <strong>No chats Available</strong>
+        {% else %}
         <table id="table">
             <thead id="table-head">
                 <tr id="head-row">
@@ -60,6 +64,8 @@ PeerRental | Chatwith {{user.username}}
                 {% endfor %}
             </tbody>
         </table>
+        {% endif %}
+            
     </div>
 </div>
 

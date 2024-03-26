@@ -69,6 +69,11 @@ PeerRental | Home {{user.username}}
                         {{chat.message}}
                         <div class="chat-date"><small>{{chat.date_time}}</small></div>
                     </div>
+                    {% elif chat.msg_type == 'coming' %}
+                    <div class="msg-left">
+                        {{chat.message}}
+                        <div class="chat-date"><small>{{chat.date_time}}</small></div>
+                    </div>
                     {% endif %}
                     {% endfor %}
 

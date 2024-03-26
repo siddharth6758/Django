@@ -179,6 +179,9 @@
     display: flex;
     justify-content: space-between;
 }
+#prod-btns-apply{
+    display: flex;
+}
 #product-display{
     width: 50%;
 }
@@ -274,9 +277,20 @@
 .data-row:nth-child(even) {
     background-color: #f9f9f9;
 }
+#prodapply{
+    width: 50%;
+    margin:20px auto;
+    text-align: center;
+}
 
+#application-form, #application{
+    resize: none;
+    margin: 10px 0;
+}
 
-
+#application-form:focus{
+    outline: none;
+}
 /* ----------------FOOTER----------------- */
 
 #footer{

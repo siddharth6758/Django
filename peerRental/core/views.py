@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from userAuthenticate.models import CustomUser
-from products.models import Products,ChatMessages
+from products.models import Products,ChatMessages,RentApplication
 from django.contrib import messages
 import re
 
@@ -52,17 +52,19 @@ def complete_order(req,prod_id,buy_id,sell_id):
             chat_save.save()
             return HttpResponseRedirect(reverse('complete_order', args=(prod_id, buy_id, sell_id)))
     chatmessages = ChatMessages.objects.filter(chat_prod_id=prod_id).filter(msg_from=buy_id).filter(msg_to=sell_id).values()
+    applied_flag = 'false'
+    if RentApplication.objects.filter(applied_to_prod=prod_id,buyer_id=buy_id).exists():
+        applied_flag = 'true'
     return render(req,'rentpage.html',context={
         'id':buy_id,
         'product':product,
         'chatmessages':chatmessages,
+        'applied_flag':applied_flag,
     })
 
 @login_required(login_url='/login/')
 def clearchats(req,prod_id,to_id,from_id):
     ChatMessages.objects.filter(chat_prod_id=prod_id).filter(msg_from=from_id).filter(msg_to=to_id).delete()
-    print(to_id,from_id)
-    print(req.user.id,to_id,from_id)
     if req.user.id == from_id:
         return redirect(f'/rentprod/{prod_id}B{from_id}S{to_id}')
     elif req.user.id == to_id:
@@ -79,8 +81,27 @@ def myproducts(req,id):
 
 @login_required(login_url='/login/')
 def confirm_rent(req,prod_id,buy_id,sell_id):
-    print(prod_id,buy_id,sell_id)
-    return render(req,'base.html')
+    product = Products.objects.filter(prod_id=prod_id,posted_by_id=sell_id).first()
+    if req.method == 'POST':
+        application_msg = req.POST.get('application')
+        if len(application_msg) == 0:
+            messages.error(req,'Application cannot be Empty!')
+            return redirect(f'/confirm_rent/{prod_id}B{buy_id}S{sell_id}')
+        else:
+            application = RentApplication.objects.create(
+                applied_to_prod=product,
+                buyer_id=buy_id,
+                seller_id=sell_id,
+                application=application_msg,
+                status='pending'
+            )
+            application.save()
+            messages.success(req,'Application sent to Seller!')
+            return redirect(f'/user/{buy_id}')
+    return render(req,'confirmrent.html',context={
+        'id':req.user.id,
+        'product':product,
+    })
 
 @login_required(login_url='/login/')
 def sellerchat(req,prod_id,buy_id,sell_id):

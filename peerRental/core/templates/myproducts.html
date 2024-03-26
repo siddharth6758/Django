@@ -52,9 +52,10 @@ PeerRental | Home {{user.username}}
                     <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
                     <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
                 </div>
-                <div class="prod-btns">
+                <div class="prod-btns-apply">
                     <a href='chatwith/{{product.prod_id}}W{{id}}' class="btn success-btn" type="submit">Chat</a>
                     <a href="edit/{{product.prod_id}}X{{id}}" class="btn">Edit</a>
+                    <a href="" class="btn">Applications</a>
                 </div>
             </div>
             {% endfor %}

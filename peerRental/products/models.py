@@ -37,3 +37,12 @@ class ChatMessages(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
     msg_type = models.CharField(max_length=10,null=False)
     message = models.CharField(max_length=200,null=False)    
+    
+
+class RentApplication(models.Model):
+    applied_to_prod = models.ForeignKey(Products,on_delete=models.CASCADE)
+    buyer_id = models.CharField(max_length=2,null=False)
+    seller_id = models.CharField(max_length=2,null=False)
+    application = models.CharField(max_length=200,null=False)
+    datetime = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10,default='pending')

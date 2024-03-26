@@ -50,10 +50,13 @@ PeerRental | Home {{user.username}}
                     <div class="price-display"><strong>Price:</strong> Rs {{product.price}} {{product.rent_type}}</div>
                 </div>
                 <div class="btns-display">
-                    <form action="{% url 'confirm_rent' product.prod_id id product.posted_by_id %}" method="POST">
-                        {% csrf_token %}
-                        <button class="btn success-btn">Rent</button>
-                    </form>
+                    
+                    {% if applied_flag == 'true' %}
+                    <button class="btn btn-disabled" disabled>Already Applied</button>
+                    {% elif applied_flag == 'false' %}
+                    <a href="/confirm_rent/{{product.prod_id}}B{{id}}S{{product.posted_by_id}}" class="btn success-btn">Apply for Rent</a>
+                    {% endif %}
+                        
                     <button class="btn" id="chat-btn">Chat with Owner</button>
                 </div>
             </div>

@@ -181,6 +181,7 @@
 }
 #prod-btns-apply{
     display: flex;
+    justify-content: space-around;
 }
 #product-display{
     width: 50%;

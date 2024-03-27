@@ -59,3 +59,18 @@ def rejectapp(req,prod_id,buy_id):
         rentapp.update(status='rejected')
     messages.info(req,f'{user.username} application rejected!')
     return redirect(f'/myproducts/{req.user.id}')
+
+
+@login_required(login_url='/login/')
+def myorders(req,id):
+    chats = ChatMessages.objects.filter(msg_from=id).values('chat_prod_id_id','msg_to')
+    uni_prods = {i.chat_prod_id_id for i in chats}
+    userchatdetails = []
+    for prod in uni_prods:
+        prod_sell = Products.objects.filter(prod_id=prod,)
+        vals = {}
+        vals['prod_id'] = prod
+        
+    return render(req,'myorders.html',context={
+        'id':req.user.id,
+    })

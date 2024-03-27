@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+PeerRental | Orders
+{% endblock title %}
+
+{% block navigation-bar %}
+<div class="container">
+    <nav class="fixed-nav">
+        <div id='logo'>
+            <a href="/user/{{id}}">
+                <img src="{% static 'public/logo.png' %}" alt="Logo">
+            </a>
+        </div>
+        <div id="nav-links">
+            <a href="/user/{{id}}">Back</a>
+        </div>
+        <div id="nav-btn">
+            <a href="/userprofile" id="user-prof">
+                <img src="{% static 'public/user.png' %}" alt="user" id="img-btn">
+                <span>{{user.first_name}}</span>
+            </a>
+            <a href="/logout" class="btn">Logout</a>
+        </div>
+    </nav>
+</div>
+{% endblock navigation-bar %}
+
+
+{% block main-content %}
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
+{% endfor %}
+{% endif %}
+<div class="container">
+    <div id="prod-container">
+        <h3 style="margin-bottom: 20px; font-size: 50px;">Your Messages</h3>
+        
+        {% if userchatdetails|length == 0 %}
+            <strong>No chats Available</strong>
+        {% else %}
+        <table id="table">
+            <thead id="table-head">
+                <tr id="head-row">
+                    <th class="th">User id</th>
+                    <th class="th">Username</th>
+                    <th class="th">Email</th>
+                    <th class="th">Last Chat</th>
+                    <th class="th">Chat</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                {% for chatuser in userchatdetails %}
+                <tr class="data-row">
+                    <td class="td">{{chatuser.id}}</td>
+                    <td class="td">{{chatuser.username}}</td>
+                    <td class="td">{{chatuser.email}}</td>
+                    <td class="td">{{chatuser.last_chat}}</td>
+                    <td class="td"><a href="/sellerchat/{{prod_id}}B{{chatuser.id}}S{{id}}" class="btn">Chat</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+            
+    </div>
+    <div id="prod-container">
+        <h3 style="margin-bottom: 20px; font-size: 50px;">Applications</h3>
+        
+        {% if applications|length == 0 %}
+            <strong>No Applications Available</strong>
+        {% else %}
+        <table id="table">
+            <thead id="table-head">
+                <tr id="head-row">
+                    <th class="th">User id</th>
+                    <th class="th">Username</th>
+                    <th class="th">Email</th>
+                    <th class="th">Status</th>
+                    <th class="th">Application</th>
+                    <th class="th">Review</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                {% for request in applications %}
+                <tr class="data-row">
+                    <td class="td">{{request.buyer_id}}</td>
+                    <td class="td">{{request.username}}</td>
+                    <td class="td">{{request.email}}</td>
+                    {% if request.status == 'rejected' %}
+                    <td class="td"><div class="status" style="background-color: #f05a4f;"></div></td>
+                    {% elif request.status == 'accepted'%}
+                    <td class="td"><div class="status" style="background-color: #4ff04f;"></div></td>
+                    {% else %}
+                    <td class="td"><div class="status" style="background-color: #e0e032;"></div></td>
+                    {% endif %}
+                    <td class="td th-application">{{request.application}}</td>
+                    {% if request.status == 'accepted' or request.status == 'rejected'%}
+                    <td class="td"><button class="btn-disabled btn" disabled>View</button></td>
+                    {% else %}
+                    <td class="td"><a href="/applicationdetails/{{request.prod_id}}B{{request.buyer_id}}S{{id}}" class="btn">View</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+            
+    </div>
+</div>
+
+<footer id="footer">
+    <div class="container" id="footer-container">
+        <div id="left-footer">
+            <img src="{% static 'public/logo.png' %}" alt="logo" width="100px">
+            <h4 style="margin: 10px 0; font-size: 25px;">About</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nemo hic nihil temporibus sed quod veniam
+                ex corporis maiores commodi.</p>
+        </div>
+        <div id="middle-footer">
+            <h4 style="margin-bottom: 20px; font-size: 25px;">Useful Links</h4>
+            <a href="">Home</a>
+            <a href="">Service</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+            <a href="">FAQ</a>
+        </div>
+        <div id="right-footer">
+            <h4 style="font-size: 25px;">Subscribe to Newsletter</h4>
+            <div id="newsletter">
+                <input type="email" id="nlform" placeholder="Enter your email address">
+                <button class="btn">Send</button>
+            </div>
+            <div id="social">
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock main-content %}

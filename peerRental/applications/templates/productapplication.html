@@ -47,6 +47,7 @@ PeerRental | Product Applications {{user.username}}
                     <th class="th">User id</th>
                     <th class="th">Username</th>
                     <th class="th">Email</th>
+                    <th class="th">Status</th>
                     <th class="th">Application</th>
                     <th class="th">Review</th>
                 </tr>
@@ -57,8 +58,19 @@ PeerRental | Product Applications {{user.username}}
                     <td class="td">{{request.buyer_id}}</td>
                     <td class="td">{{request.username}}</td>
                     <td class="td">{{request.email}}</td>
+                    {% if request.status == 'rejected' %}
+                    <td class="td"><div class="status" style="background-color: #f05a4f;"></div></td>
+                    {% elif request.status == 'accepted'%}
+                    <td class="td"><div class="status" style="background-color: #4ff04f;"></div></td>
+                    {% else %}
+                    <td class="td"><div class="status" style="background-color: #e0e032;"></div></td>
+                    {% endif %}
                     <td class="td th-application">{{request.application}}</td>
+                    {% if request.status == 'accepted' or request.status == 'rejected'%}
+                    <td class="td"><button class="btn-disabled btn" disabled>View</button></td>
+                    {% else %}
                     <td class="td"><a href="/applicationdetails/{{request.prod_id}}B{{request.buyer_id}}S{{id}}" class="btn">View</a></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

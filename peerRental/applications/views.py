@@ -15,8 +15,9 @@ def applicationsreq(req,prod_id,sell_id):
         vals['buyer_id'] = buy_users.id
         vals['username'] = buy_users.username
         vals['email'] = buy_users.email
-        vals['application'] = prodapplications.filter(applied_to_prod=prod_id,seller_id=sell_id,buyer_id=id).first()['application']
+        vals['application'] = prodapplications.filter(buyer_id=id).first()['application']
         vals['prod_id'] = prod_id
+        vals['status'] = prodapplications.filter(buyer_id=id).first()['status']
         applications.append(vals)
     return render(req,'productapplication.html',context={
         'id':req.user.id,
@@ -43,12 +44,18 @@ def acceptapp(req,prod_id,buy_id):
     otherapp = RentApplication.objects.filter(applied_to_prod=prod_id,seller_id=req.user.id).exclude(buyer_id=buy_id)
     if otherapp:
         otherapp.update(status='rejected')
+    product = Products.objects.filter(prod_id=prod_id,posted_by_id=req.user.id)
+    if product:
+        product.update(rented_by=buy_id)
+    messages.success(req,'Product successfully rented!')
     return redirect(f'/myproducts/{req.user.id}')
 
 
 @login_required(login_url='/login/')
 def rejectapp(req,prod_id,buy_id):
-    rentapp = RentApplication.objects.filter(applied_to_prod=prod_id,seller_id=req.user.id,buyer_id=buy_id).values()
-    # rentapp.status = 'rejected'
-    rentapp.save()
-    return redirect(f'myproducts/{req.user.id}')
+    rentapp = RentApplication.objects.filter(applied_to_prod=prod_id,seller_id=req.user.id,buyer_id=buy_id)
+    user = CustomUser.objects.filter(id=buy_id).first()
+    if rentapp:
+        rentapp.update(status='rejected')
+    messages.info(req,f'{user.username} application rejected!')
+    return redirect(f'/myproducts/{req.user.id}')

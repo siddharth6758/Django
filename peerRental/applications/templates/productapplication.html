@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-PeerRental | Home {{user.username}}
+PeerRental | Product Applications {{user.username}}
 {% endblock title %}
 
 {% block navigation-bar %}
@@ -14,9 +14,7 @@ PeerRental | Home {{user.username}}
             </a>
         </div>
         <div id="nav-links">
-            <a href="/user/{{id}}">Back</a>
-            <a href="/uploadproduct">Upload</a>
-            <a href="/myorders/{{id}}">My Orders</a>
+            <a href="/myproducts/{{id}}">Back</a>
         </div>
         <div id="nav-btn">
             <a href="/userprofile" id="user-prof">
@@ -38,29 +36,35 @@ PeerRental | Home {{user.username}}
 {% endif %}
 <div class="container">
     <div id="prod-container">
-        <h3 style="margin-bottom: 20px; font-size: 50px;">Your Posts</h3>
-        <div id="product-list">
-            {% for product in products %}
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="../../media/{{product.product_image}}" alt="prod" width="100%" height="100%">
-                </div>
-                <div class="prod-content">
-                    <h3 style="margin:5px 0;" class="prod-title">{{product.title}}</h3>
-                    <p class="prod-desc"><strong>Description:</strong>{{product.description}}</p>
-                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by}}</div>
-                    <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
-                    <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
-                </div>
-                <div id="prod-btns-apply">
-                    <a href='chatwith/{{product.prod_id}}W{{id}}' class="btn success-btn" type="submit">Chat</a>
-                    <a href="edit/{{product.prod_id}}X{{id}}" class="btn">Edit</a>
-                    <a href="/productapplications/{{product.prod_id}}O{{id}}" class="btn">Requests</a>
-                </div>
-            </div>
-            {% endfor %}
-
-        </div>
+        <h3 style="margin-bottom: 20px; font-size: 50px;">Applications</h3>
+        
+        {% if applications|length == 0 %}
+            <strong>No Applications Available</strong>
+        {% else %}
+        <table id="table">
+            <thead id="table-head">
+                <tr id="head-row">
+                    <th class="th">User id</th>
+                    <th class="th">Username</th>
+                    <th class="th">Email</th>
+                    <th class="th">Application</th>
+                    <th class="th">Review</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                {% for request in applications %}
+                <tr class="data-row">
+                    <td class="td">{{request.buyer_id}}</td>
+                    <td class="td">{{request.username}}</td>
+                    <td class="td">{{request.email}}</td>
+                    <td class="td th-application">{{request.application}}</td>
+                    <td class="td"><a href="/applicationdetails/{{request.prod_id}}B{{request.buyer_id}}S{{id}}" class="btn">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+            
     </div>
 </div>
 

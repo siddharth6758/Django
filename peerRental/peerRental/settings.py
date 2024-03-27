@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'userAuthenticate',
     'core',
     'products',
+    'applications',
 ]
 
 AUTH_USER_MODEL = 'userAuthenticate.CustomUser'

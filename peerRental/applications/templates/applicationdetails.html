@@ -14,9 +14,7 @@ PeerRental | Home {{user.username}}
             </a>
         </div>
         <div id="nav-links">
-            <a href="/user/{{id}}">Back</a>
-            <a href="/uploadproduct">Upload</a>
-            <a href="/myorders/{{id}}">My Orders</a>
+            <a href="/productapplications/{{product.prod_id}}O{{id}}">Back</a>
         </div>
         <div id="nav-btn">
             <a href="/userprofile" id="user-prof">
@@ -38,28 +36,35 @@ PeerRental | Home {{user.username}}
 {% endif %}
 <div class="container">
     <div id="prod-container">
-        <h3 style="margin-bottom: 20px; font-size: 50px;">Your Posts</h3>
-        <div id="product-list">
-            {% for product in products %}
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="../../media/{{product.product_image}}" alt="prod" width="100%" height="100%">
+        <div id="prodtorent">
+            <div id="product-display">
+                <img src="../../media/{{product.product_image}}" alt="prod" width="250px" height="250px"
+                    style="margin: 0 10px;">
+                <div class="prod-content" style="padding: 0px; margin: 0 10px;">
+                    <h3 style="margin:20px 0; font-size: 30px;">{{product.title}}</h3>
+                    <p class="desc-display"><strong>Description: </strong>{{product.description}}</p>
+                    <div class="postedby-display"><strong>Posted by: </strong>{{product.posted_by}}</div>
+                    <div class="postedon-display"><strong>Posted on: </strong>{{product.posted_on}}</div>
+                    <div class="price-display"><strong>Price:</strong> Rs {{product.price}} {{product.rent_type}}</div>
                 </div>
-                <div class="prod-content">
-                    <h3 style="margin:5px 0;" class="prod-title">{{product.title}}</h3>
-                    <p class="prod-desc"><strong>Description:</strong>{{product.description}}</p>
-                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by}}</div>
-                    <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
-                    <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
-                </div>
-                <div id="prod-btns-apply">
-                    <a href='chatwith/{{product.prod_id}}W{{id}}' class="btn success-btn" type="submit">Chat</a>
-                    <a href="edit/{{product.prod_id}}X{{id}}" class="btn">Edit</a>
-                    <a href="/productapplications/{{product.prod_id}}O{{id}}" class="btn">Requests</a>
+                <div class="btns-display">
+                    <a href="/accept/{{product.prod_id}}A{{user.id}}" class="btn success-btn">Accept</a>
+                    <a href="/reject/{{product.prod_id}}R{{user.id}}" class="btn cancel-btn">Reject</a>
                 </div>
             </div>
-            {% endfor %}
-
+            <div id="application-container">
+                <h3 style="margin:20px 0; font-size: 30px;">Application</h3>
+                <div id="app-header">
+                    <div><strong>From :</strong> {{user.username}}</div>
+                    <div><strong>Email-Id :</strong> {{user.email}}</div>
+                    <div><strong>Name :</strong> {{user.first_name}} {{user.last_name}}</div>
+                    <div><strong>Phone No. :</strong> {{user.phone}}</div>
+                    <div><strong>Address :</strong> {{user.address}}</div>
+                </div>
+                <div id="app-content">
+                    <p>{{application.application}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

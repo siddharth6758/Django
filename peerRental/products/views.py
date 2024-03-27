@@ -51,7 +51,7 @@ def edit_prod(req,prod_id,id):
             rent_type = req.POST.get('rent_type')
             title = req.POST.get('title')
             if prod_img:
-                product.product_image - prod_img
+                product.product_image = prod_img
             product.title = title
             product.description = description
             product.price = price

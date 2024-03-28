@@ -99,7 +99,12 @@ def myorders(req,id):
 
 @login_required(login_url='/login/')
 def applicationedits(req,prod_id,buy_id):
-    application = RentApplication.objects.filter(applied_to_prod=prod_id,buyer_id=buy_id).values('application').first()
+    application = RentApplication.objects.filter(applied_to_prod=prod_id,buyer_id=buy_id).first()
+    if req.method == 'POST':
+        app_msg = req.POST.get('application-edit')
+        RentApplication.objects.filter(applied_to_prod=prod_id,buyer_id=buy_id).update(application=app_msg)
+        messages.success(req,'Application message updated!')
+        return redirect(f'/applicationedit/{prod_id}A{buy_id}')
     return render(req,'applicationedit.html',context={
         'id':req.user.id,
         'user':req.user,

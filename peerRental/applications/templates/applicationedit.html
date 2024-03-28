@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-PeerRental | Application
+PeerRental | Application {{application.prod_id}}
 {% endblock title %}
 
 {% block navigation-bar %}
@@ -36,7 +36,7 @@ PeerRental | Application
 {% endif %}
 <div class="container">
     <div id="application-container">
-        <h3 style="margin:20px 0; font-size: 30px;">Application</h3>
+        <h3 style="margin:20px 0; font-size: 30px;">Your Application</h3>
         <div id="app-header">
             <div><strong>From :</strong> {{user.username}}</div>
             <div><strong>Email-Id :</strong> {{user.email}}</div>
@@ -44,12 +44,13 @@ PeerRental | Application
             <div><strong>Phone No. :</strong> {{user.phone}}</div>
             <div><strong>Address :</strong> {{user.address}}</div>
         </div>
-        <div id="app-content">
+        <div id="app-content-edit">
             <form action="" method="POST">
-                <textarea name="application-edit" id="application-edit" cols="40" rows="15">
-                    {{application.application}}
+                {% csrf_token %}
+                <textarea id="application-edit" name="application-edit" cols="40" rows="15">
+                    {{ application.application }}
                 </textarea>
-                <button type="submit" class="btn success-btn">Edit Application</button>
+                <button type="submit" id="app-editbtn" class="btn btn-disabled" disabled>Edit Application</button>
             </form>
         </div>
     </div>
@@ -86,4 +87,27 @@ PeerRental | Application
         </div>
     </div>
 </footer>
+
+<script>
+    const app_editbtn = document.getElementById('app-editbtn')
+    const app_edit_textarea = document.getElementById('application-edit')
+    const app_prev_val = app_edit_textarea.value
+
+    app_edit_textarea.addEventListener('input', () => {
+        let value = app_edit_textarea.value
+        if(app_prev_val != value){
+            if(app_editbtn.classList.contains('btn-disabled')){
+                app_editbtn.classList.remove('btn-disabled')
+                app_editbtn.classList.add('success-btn')
+                app_editbtn.disabled = false
+            }
+        }else{
+            if(app_editbtn.classList.contains('success-btn')){
+                app_editbtn.classList.add('btn-disabled')
+                app_editbtn.classList.remove('success-btn')
+                app_editbtn.disabled = true
+            }
+        }
+    });
+</script>
 {% endblock main-content %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from products.forms import *
 from products.models import *
 from userAuthenticate.models import *
@@ -57,6 +58,7 @@ def edit_prod(req,prod_id,id):
             product.price = price
             product.rent_type = rent_type
             product.save()
+            messages.success(req,'Product has been edited!')
             return redirect(f'/user/{id}')
     return render(req,'productedit.html',context={
         'forms':forms,

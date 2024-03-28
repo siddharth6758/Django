@@ -63,14 +63,45 @@ def rejectapp(req,prod_id,buy_id):
 
 @login_required(login_url='/login/')
 def myorders(req,id):
+    applications = []
+    sent_req = RentApplication.objects.filter(buyer_id=id).values('applied_to_prod_id','status')
+    for i in sent_req:
+        vals = {}
+        prod = Products.objects.filter(prod_id=i['applied_to_prod_id']).first()
+        vals['prod_id'] = i['applied_to_prod_id']
+        vals['title'] = prod.title
+        vals['image'] = prod.product_image
+        vals['seller_username'] = prod.posted_by.username
+        vals['seller_email'] = prod.posted_by.email
+        vals['status'] = i['status']
+        applications.append(vals)
     chats = ChatMessages.objects.filter(msg_from=id).values('chat_prod_id_id','msg_to')
-    uni_prods = {i.chat_prod_id_id for i in chats}
+    uni_prods = {i['chat_prod_id_id'] for i in chats}
     userchatdetails = []
     for prod in uni_prods:
-        prod_sell = Products.objects.filter(prod_id=prod,)
+        prod_sell = Products.objects.filter(prod_id=prod).first()
+        chat_buyer = chats.filter(chat_prod_id=prod,msg_to=prod_sell.posted_by_id,msg_from=id).values('message').last()
         vals = {}
         vals['prod_id'] = prod
-        
+        vals['prod_title'] = prod_sell.title
+        vals['seller_id'] = prod_sell.posted_by_id
+        vals['seller_username'] = prod_sell.posted_by.username
+        vals['seller_email'] = prod_sell.posted_by.email
+        vals['last_chat'] = chat_buyer["message"]
+        userchatdetails.append(vals)
+    # print(userchatdetails)
     return render(req,'myorders.html',context={
         'id':req.user.id,
+        'userchatdetails':userchatdetails,
+        'applications':applications,
+    })
+    
+
+@login_required(login_url='/login/')
+def applicationedits(req,prod_id,buy_id):
+    application = RentApplication.objects.filter(applied_to_prod=prod_id,buyer_id=buy_id).values('application').first()
+    return render(req,'applicationedit.html',context={
+        'id':req.user.id,
+        'user':req.user,
+        'application':application,
     })

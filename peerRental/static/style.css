@@ -357,7 +357,13 @@
     resize: none;
     margin: 10px 0;
 }
-
+#application-edit{
+    resize: none;
+    display: block;
+    margin: 10px auto;
+    /* border: none; */
+    font-size: 18px;
+}
 #application-form:focus {
     outline: none;
 }

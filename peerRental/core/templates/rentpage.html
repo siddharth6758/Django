@@ -45,7 +45,8 @@ PeerRental | Home {{user.username}}
                 <div class="prod-content" style="padding: 0px; margin: 0 10px;">
                     <h3 style="margin:20px 0; font-size: 30px;">{{product.title}}</h3>
                     <p class="desc-display"><strong>Description: </strong>{{product.description}}</p>
-                    <div class="postedby-display"><strong>Posted by: </strong>{{product.posted_by}}</div>
+                    <div class="postedby-display"><strong>Seller Email-Id: </strong>{{product.posted_by}}</div>
+                    <div class="postedby-display"><strong>Posted by: </strong>{{product.posted_by.username}}</div>
                     <div class="postedon-display"><strong>Posted on: </strong>{{product.posted_on}}</div>
                     <div class="price-display"><strong>Price:</strong> Rs {{product.price}} {{product.rent_type}}</div>
                 </div>
@@ -62,7 +63,7 @@ PeerRental | Home {{user.username}}
             </div>
             <div id="messages-container" class="hidden">
                 <div id="chat-title">
-                    <h3 style="font-size: 20px;">Chatting with {{product.posted_by}}</h3>
+                    <h3 style="font-size: 20px;">Chatting with {{product.posted_by.username}}</h3>
                     <a href="{% url 'clearchats' product.prod_id id product.posted_by_id %}" class="btn">Clear Chat</a>
                 </div>
                 <div id="chat-container">

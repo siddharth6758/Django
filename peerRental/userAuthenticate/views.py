@@ -69,12 +69,6 @@ def logout_user(req):
     return redirect('home')
 
 
-# @login_required(login_url='/login/')
-# def adminpage(req):
-#     print(req)
-#     return render(req,'adminpanel.html')
-
-
 @login_required(login_url='/login/')
 def userhome(req,id):
     products = Products.objects.all()

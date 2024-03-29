@@ -474,6 +474,43 @@
     margin: 0px 10px;
 }
 
+#userdetails{
+    width: 80%;
+    height: 500px;
+    display: flex;
+    margin: 40px auto;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#user-img{
+    width:50%;
+    height: 100%;
+}
+#user-content{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    margin: 10px;
+}
+.user-name input{
+    width: 100px;
+}
+.user-form-field{
+    margin:5px 5px;
+}
+.user-form-field label{
+    font-weight: bold;
+}
+.noneditable input:focus{
+    outline: none;
+}
+.user-form-field input,textarea{
+    padding: 5px 5px;
+    font-size: 16px;
+    resize: none;
+    border: none;
+    border-bottom: 1px solid rgb(53, 53, 53);
+}
 #img-btn {
     width: 50px;
     background-color: #A084E8;

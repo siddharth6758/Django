@@ -128,3 +128,35 @@ def sellerchat(req,prod_id,buy_id,sell_id):
         'product':product,
         'buyer':buyer,
     })
+    
+    
+@login_required(login_url='/login/')
+def userprofile(req,id):
+    user = CustomUser.objects.filter(id=id).first()
+    if req.method == 'POST':
+        first_name = req.POST.get('user-firstname')
+        last_name = req.POST.get('user-lastname')
+        email= req.POST.get('user-email')
+        phone = req.POST.get('user-phone')
+        username = req.POST.get('user-username')
+        address = req.POST.get('user-address')
+        print(first_name,
+            last_name,
+            email,
+            phone,
+            username,
+            address )
+        CustomUser.objects.filter(id=id).update(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            phone=phone,
+            username=username,
+            address=address    
+        )
+        messages.success(req,'Profile Saved!')
+        return HttpResponseRedirect(reverse('userprofile', args=(id,)))
+    return render(req,'userprofile.html',context={
+        'id':id,
+        'user':user,
+    })

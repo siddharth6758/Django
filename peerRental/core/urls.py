@@ -8,6 +8,7 @@ urlpatterns = [
     path('rentprod/<str:prod_id>B<int:buy_id>S<int:sell_id>',cv.complete_order,name='complete_order'),
     path('clearchats/<str:prod_id>B<int:from_id>S<int:to_id>',cv.clearchats,name='clearchats'),
     path('confirm_rent/<str:prod_id>B<int:buy_id>S<int:sell_id>',cv.confirm_rent,name='confirm_rent'),
-    path('myproducts/<str:id>',cv.myproducts,name='myproducts'),
+    path('myproducts/<int:id>',cv.myproducts,name='myproducts'),
     path('sellerchat/<str:prod_id>B<int:buy_id>S<int:sell_id>',cv.sellerchat,name='sellerchat'),
+    path('userprofile/<int:id>',cv.userprofile,name='userprofile'),
 ]

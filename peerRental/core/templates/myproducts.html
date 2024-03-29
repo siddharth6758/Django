@@ -19,7 +19,7 @@ PeerRental | Home {{user.username}}
             <a href="/myorders/{{id}}">My Orders</a>
         </div>
         <div id="nav-btn">
-            <a href="/userprofile" id="user-prof">
+            <a href="/userprofile/{{id}}" id="user-prof">
                 <img src="{% static 'public/user.png' %}" alt="user" id="img-btn">
                 <span>{{user.first_name}}</span>
             </a>
@@ -48,14 +48,14 @@ PeerRental | Home {{user.username}}
                 <div class="prod-content">
                     <h3 style="margin:5px 0;" class="prod-title">{{product.title}}</h3>
                     <p class="prod-desc"><strong>Description:</strong>{{product.description}}</p>
-                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by}}</div>
+                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by.username}}</div>
                     <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
                     <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
                 </div>
                 <div id="prod-btns-apply">
-                    <a href='chatwith/{{product.prod_id}}W{{id}}' class="btn success-btn" type="submit">Chat</a>
+                    <a href='chatwith/{{product.prod_id}}W{{id}}' class="btn" type="submit">Chat</a>
                     <a href="edit/{{product.prod_id}}X{{id}}" class="btn">Edit</a>
-                    <a href="/productapplications/{{product.prod_id}}O{{id}}" class="btn">Requests</a>
+                    <a href="/productapplications/{{product.prod_id}}O{{id}}" class="btn success-btn">Requests</a>
                 </div>
             </div>
             {% endfor %}

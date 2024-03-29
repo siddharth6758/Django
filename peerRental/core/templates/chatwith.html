@@ -18,7 +18,7 @@ PeerRental | Chatwith {{user.username}}
             <a href="/myorders/{{id}}">My Orders</a>
         </div>
         <div id="nav-btn">
-            <a href="/userprofile" id="user-prof">
+            <a href="/userprofile/{{id}}" id="user-prof">
                 <img src="{% static 'public/user.png' %}" alt="user" id="img-btn">
                 <span>{{user.first_name}}</span>
             </a>

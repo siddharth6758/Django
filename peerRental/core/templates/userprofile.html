@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+PeerRental | User Profile {{user.username}}
+{% endblock title %}
+
+{% block navigation-bar %}
+<div class="container">
+    <nav class="fixed-nav">
+        <div id='logo'>
+            <a href="/user/{{id}}">
+                <img src="{% static 'public/logo.png' %}" alt="Logo">
+            </a>
+        </div>
+        <div id="nav-links">
+            <a href="/user/{{id}}">Back</a>
+            <a href="/myorders/{{id}}">My Orders</a>
+        </div>
+        <div id="nav-btn">
+            <a href="/userprofile/{{id}}" id="user-prof">
+                <img src="{% static 'public/user.png' %}" alt="user" id="img-btn">
+                <span>{{user.first_name}}</span>
+            </a>
+            <a href="/logout" class="btn">Logout</a>
+        </div>
+    </nav>
+</div>
+{% endblock navigation-bar %}
+
+
+{% block main-content %}
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="{{message.tags}} container" {% endif %}>{{message.tags}} : {{message}}</div>
+{% endfor %}
+{% endif %}
+<div class="container">
+    <div id="userdetails">
+        <div id="user-img">
+            <img src="{% static 'public/user.png' %}" alt="user" width="100%" height="100%">
+        </div>
+        <form action="" method="POST" id="user-content">
+            {% csrf_token %}
+            <div class="user-form-field user-name">
+                <label for="user-firstname">Name:</label>
+                <input type="text" value="{{user.first_name}}" name="user-firstname">
+                <input type="text" value="{{user.last_name}}" name="user-lastname">
+            </div>
+            <div class="user-form-field">
+                <label for="user-email">Email-Id:</label>
+                <input type="text" value="{{user.email}}" name="user-email">
+            </div>
+            <div class="user-form-field">
+                <label for="user-username">Username:</label>
+                <input type="text" value="{{user.username}}" name="user-username">
+            </div>
+            <div class="user-form-field">
+                <label for="user-phone">Phone:</label>
+                <input type="text" value="{{user.phone}}" name="user-phone">
+            </div>
+            <div class="user-form-field">
+                <label for="user-address">Address:</label>
+                <textarea name="user-address" cols="20" rows="3">{{user.address}}</textarea>
+            </div>
+            <div class="user-form-field noneditable">
+                <label for="user-datejoined">Date joined:</label>
+                <input type="text" value="{{user.date_joined}}" style="color:#afafaf" name="user-datejoined" readonly>
+            </div>
+            <div class="user-form-field noneditable">
+                <label for="user-lastlogin">Last Login:</label>
+                <input type="text" value="{{user.last_login}}" style="color:#afafaf" name="user-lastlogin" readonly>
+            </div>
+            <div class="user-form-field">
+                <button type="submit" class="btn success-btn">Edit</button>
+                <button type="reset" class="btn cancel-btn">Reset</button>
+            </div>
+        </form>
+        <!-- <span><strong>Name : </strong>{{user.first_name}} {{user.last_name}}</span>
+            <span><strong>Email : </strong>{{user.email}}</span>
+            <span><strong>Username : </strong>{{user.username}}</span>
+            <span><strong>Phone Number : </strong>{{user.phone}}</span>
+            <span><strong>Address : </strong>{{user.address}}</span>
+            <span><strong>Date Joined : </strong>{{user.date_joined}}</span>
+            <span><strong>Last Login : </strong>{{user.last_login}}</span> -->
+    </div>
+</div>
+
+<footer id="footer">
+    <div class="container" id="footer-container">
+        <div id="left-footer">
+            <img src="{% static 'public/logo.png' %}" alt="logo" width="100px">
+            <h4 style="margin: 10px 0; font-size: 25px;">About</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nemo hic nihil temporibus sed quod veniam
+                ex corporis maiores commodi.</p>
+        </div>
+        <div id="middle-footer">
+            <h4 style="margin-bottom: 20px; font-size: 25px;">Useful Links</h4>
+            <a href="">Home</a>
+            <a href="">Service</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+            <a href="">FAQ</a>
+        </div>
+        <div id="right-footer">
+            <h4 style="font-size: 25px;">Subscribe to Newsletter</h4>
+            <div id="newsletter">
+                <input type="email" id="nlform" placeholder="Enter your email address">
+                <button class="btn">Send</button>
+            </div>
+            <div id="social">
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock main-content %}

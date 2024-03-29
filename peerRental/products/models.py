@@ -30,6 +30,9 @@ class Products(models.Model):
             self.prod_id = pk_generator()
         super().save(*args, **kwargs)
         
+    class Meta:
+        verbose_name_plural = "Products"
+        
 class ChatMessages(models.Model):
     chat_prod_id = models.ForeignKey(Products,on_delete=models.CASCADE)
     msg_to = models.CharField(max_length=2,null=False)    

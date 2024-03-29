@@ -140,12 +140,6 @@ def userprofile(req,id):
         phone = req.POST.get('user-phone')
         username = req.POST.get('user-username')
         address = req.POST.get('user-address')
-        print(first_name,
-            last_name,
-            email,
-            phone,
-            username,
-            address )
         CustomUser.objects.filter(id=id).update(
             first_name=first_name,
             last_name=last_name,

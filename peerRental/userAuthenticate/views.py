@@ -20,7 +20,7 @@ def login_user(req):
                 messages.error(req,'Wrong password')
             else:
                 login(req,user)
-                return redirect('/adminpanel')
+                return redirect('/admin')
         else:
             user = authenticate(req,email=email,password=password)
             if user is None:
@@ -69,10 +69,10 @@ def logout_user(req):
     return redirect('home')
 
 
-@login_required(login_url='/login/')
-def adminpage(req):
-    print(req)
-    return render(req,'adminpanel.html')
+# @login_required(login_url='/login/')
+# def adminpage(req):
+#     print(req)
+#     return render(req,'adminpanel.html')
 
 
 @login_required(login_url='/login/')

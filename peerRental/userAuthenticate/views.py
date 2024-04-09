@@ -26,7 +26,7 @@ def login_user(req):
                 messages.error(req,'Wrong password')
             else:
                 login(req,user)
-                return redirect(f'/user/{user.id}') 
+                return redirect(f'/user') 
     return render(req,'login.html')
 
 
@@ -57,7 +57,7 @@ def signup(req):
             user.save()
             user = authenticate(req,email=email,password=password)
             login(req,user)
-            return redirect(f'/user/{user.id}')
+            return redirect(f'/user')
     return render(req,'signup.html')
 
 

@@ -9,12 +9,12 @@ PeerRental | Home {{user.username}}
 <div class="container">
     <nav id="navbar">
         <div id='logo'>
-            <a href="/user/{{id}}">
+            <a href="{% url 'userhome' %}">
                 <img src="{% static 'public/logo.png' %}" alt="Logo">
             </a>
         </div>
         <div id="nav-links">
-            <a href="/user/{{id}}">Home</a>
+            <a href="{% url 'userhome' %}">Home</a>
             <a href="/uploadproduct">Upload</a>
             <a href="/myproducts/{{id}}">My Products</a>
             <a href="/myorders/{{id}}">My Orders</a>
@@ -107,7 +107,7 @@ PeerRental | Home {{user.username}}
                 <div class="prod-content">
                     <h3 style="margin:5px 0;" class="prod-title">{{product.title}}</h3>
                     <p class="prod-desc"><strong>Description:</strong>{{product.description}}</p>
-                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by}}</div>
+                    <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by.username}}</div>
                     <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
                     <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
                     <div class="prod-btns">

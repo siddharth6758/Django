@@ -18,10 +18,10 @@ def delete_prod(req,prod_id):
     if user['posted_by_id'] == req.user.id:
         Products.objects.filter(prod_id=prod_id).delete()
         messages.success(req,'Product has been deleted successfully!')
-        return redirect(f'/user/{req.user.id}')
+        return redirect(f'/user')
     else:
         messages.error(req,'Could not delete product!')
-        return redirect(f'/user/{req.user.id}')
+        return redirect(f'/user')
 
 
 @login_required(login_url='/login/')
@@ -31,7 +31,7 @@ def rent_prod(req,prod_id):
     selluserid = selluserid.posted_by_id
     if buyuserid == selluserid:
         messages.info(req,'You cannot rent your own product!')
-        return redirect(f'/user/{req.user.id}')
+        return redirect(f'/user')
     return redirect(f'/rentprod/{prod_id}B{buyuserid}S{selluserid}')
 
 @login_required(login_url='/login/')

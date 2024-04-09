@@ -29,7 +29,7 @@ def upload_prod(req):
             product = forms.save(commit=False)
             product.posted_by_id = req.user.id
             product.save()
-            return redirect(f"/user/{req.user.id}")
+            return redirect(f"/user")
         else:
             print(forms.error)
     return render(req,'productinsert.html',context={
@@ -43,7 +43,7 @@ def edit_prod(req,prod_id,id):
     product = Products.objects.filter(prod_id=prod_id).filter(posted_by_id=id).first()
     if req.user.id != id or product.prod_id != prod_id:
         messages.error(req,'You are not Authorised!')
-        return redirect(f'/user/{id}')
+        return redirect(f'/user')
     forms = ProductFrom(instance=product)
     if req.method == 'POST':
         forms = ProductFrom(req.POST,req.FILES,instance=product)
@@ -61,7 +61,7 @@ def edit_prod(req,prod_id,id):
             product.rent_type = rent_type
             product.save()
             messages.success(req,'Product has been edited!')
-            return redirect(f'/user/{id}')
+            return redirect(f'/user')
     return render(req,'productedit.html',context={
         'forms':forms,
         'product':product,

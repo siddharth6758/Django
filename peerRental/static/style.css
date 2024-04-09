@@ -156,6 +156,7 @@
 .prod-content {
     display: flex;
     flex-direction: column;
+    height: 250px;
     text-align: start;
     padding: 10px;
 }
@@ -176,6 +177,8 @@
 
 .prod-btns {
     display: flex;
+    margin: 0 -10px;
+    margin-top: auto;
     flex-wrap: wrap;
 }
 
@@ -203,6 +206,8 @@
 
 #prod-btns-apply {
     display: flex;
+    margin: 0 -10px;
+    margin-top: auto;
 }
 
 #prod-btns-apply a {

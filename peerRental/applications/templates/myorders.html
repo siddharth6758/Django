@@ -9,12 +9,12 @@ PeerRental | Orders
 <div class="container">
     <nav class="fixed-nav">
         <div id='logo'>
-            <a href="/user/{{id}}">
+            <a href="{% url 'userhome' %}">
                 <img src="{% static 'public/logo.png' %}" alt="Logo">
             </a>
         </div>
         <div id="nav-links">
-            <a href="/user/{{id}}">Back</a>
+            <a href="{% url 'userhome' %}">Back</a>
         </div>
         <div id="nav-btn">
             <a href="/userprofile/{{id}}" id="user-prof">

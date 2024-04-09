@@ -110,24 +110,24 @@ PeerRental | Home {{user.username}}
                     <div class="prod-postedby"><strong>Posted by:</strong>{{product.posted_by}}</div>
                     <div class="prod-postedon"><strong>Posted on:</strong>{{product.posted_on}}</div>
                     <div class="prod-price"><strong>Price:</strong> Rs {{product.price}}{{product.rent_type}}</div>
-                </div>
-                <div class="prod-btns">
-                    <form action="{% url 'delete_prod' product.prod_id %}" method="POST">
-                        {% csrf_token %}
-                        {% if id != product.posted_by_id %}
-                        <button class="btn btn-disabled" type="submit" disabled>Remove</button>
-                        {% else %}
-                        <button class="btn cancel-btn" type="submit">Remove</button>
-                        {% endif %}
-                    </form>
-                    <form action="{% url 'rent_prod' product.prod_id %}" method="POST">
-                        {% csrf_token %}
-                        {% if id == product.posted_by_id %}
-                        <button class="btn btn-disabled" type="submit" disabled>Rent</button>
-                        {% else %}
-                        <button class="btn" type="submit">Rent</button>
-                        {% endif %}
-                    </form>
+                    <div class="prod-btns">
+                        <form action="{% url 'delete_prod' product.prod_id %}" method="POST">
+                            {% csrf_token %}
+                            {% if id != product.posted_by_id %}
+                            <button class="btn btn-disabled" type="submit" disabled>Remove</button>
+                            {% else %}
+                            <button class="btn cancel-btn" type="submit">Remove</button>
+                            {% endif %}
+                        </form>
+                        <form action="{% url 'rent_prod' product.prod_id %}" method="POST">
+                            {% csrf_token %}
+                            {% if id == product.posted_by_id %}
+                            <button class="btn btn-disabled" type="submit" disabled>Rent</button>
+                            {% else %}
+                            <button class="btn" type="submit">Rent</button>
+                            {% endif %}
+                        </form>
+                    </div>
                 </div>
             </div>
             {% endif %}

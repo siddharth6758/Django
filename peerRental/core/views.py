@@ -8,7 +8,7 @@ from django.contrib import messages
 import re
 
 empty_string_pattern = r'^\s*\S.*$'
-# Create your views here.
+
 def home(req):
     return render(req,'base.html')
 

@@ -5,7 +5,6 @@ from userAuthenticate.models import CustomUser
 from products.models import Products
 from django.contrib import messages
 
-# Create your views here.
 def login_user(req):
     if req.method == 'POST':
         email = req.POST.get('email')
@@ -70,9 +69,9 @@ def logout_user(req):
 
 
 @login_required(login_url='/login/')
-def userhome(req,id):
+def userhome(req):
     products = Products.objects.all()
     return render(req,'homepage.html',context={
         'products':products,
-        'id':id,
+        'id':req.user.id,
     })

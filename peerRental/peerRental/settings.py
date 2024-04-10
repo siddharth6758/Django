@@ -85,7 +85,7 @@ DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
        'NAME': 'peerrental',
-       'USER': 'postgres',
+       'USER': 'siddharth',
        'PASSWORD': 'Drc@1234',
        'HOST': 'localhost',
        'PORT': '5432',
